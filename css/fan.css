@@ -164,6 +164,9 @@ body .button-hover:hover::before {
   transition: all 0.5s;
 }
 @media screen and (min-width: 1200px) {
+  #post figure.highlight.cpp table::before {
+    content: "cpp";
+  }
   #post figure.highlight.js table::before {
     content: "js";
   }
@@ -2175,6 +2178,9 @@ body .button-hover:hover::before {
   }
 }
 @media screen and (min-width: 900px) and (max-width: 1199px) {
+  #post figure.highlight.cpp table::before {
+    content: "cpp";
+  }
   #post figure.highlight.js table::before {
     content: "js";
   }
