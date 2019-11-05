@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="cn"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="斐波那契数"><meta name="keywords" content="数论学习"><meta name="author" content="fbz,undefined"><meta name="copyright" content="fbz"><title>斐波那契数【fbz】</title><link rel="stylesheet" href="/css/fan.css"><link rel="stylesheet" href="/css/thirdparty/jquery.mCustomScrollbar.min.css"><link rel="icon" href="/favicon.ico"><!-- script(src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")--><script src="/js/mathjax/mathjax.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+});
+</script><script>var isPassword = '' || false;
+if (isPassword) {
+    if (prompt('请输入文章密码') !== '') {
+        alert('密码错误！');
+        history.back();
+    }
+}</script><script>window.GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+}</script></head><body><canvas id="universe"></canvas><!--#body--><div id="sidebar"><div class="toggle-sidebar-info button-hover"><span data-toggle="文章目录">站点概览</span></div><div class="sidebar-toc"><div class="sidebar-toc-title">目录</div><div class="sidebar-toc-progress"><span class="progress-notice">您已阅读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc-progress-bar"></div></div><div class="sidebar-toc-content" id="sidebar-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、定义"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、通项公式"><span class="toc-number">2.</span> <span class="toc-text">二、通项公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例1-普通递归关系"><span class="toc-number">3.</span> <span class="toc-text">例1 普通递归关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例2-数字迷阵"><span class="toc-number">4.</span> <span class="toc-text">例2 数字迷阵</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info-avatar"><img class="author-info-avatar-img" src="/avatar.png"></div><div class="author-info-name">fbz</div><div class="author-info-description"></div><div class="links-buttons"><a class="links-button button-hover" href="https://github.com/fangbozhen" target="_blank">GitHub<i class="icon-dot bg-color6"></i></a><a class="links-button button-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=3349001712@qq.com&quot;" target="_blank">E-Mail<i class="icon-dot bg-color3"></i></a><a class="links-button button-hover" href="tencent://message/?uin=3349001712&amp;Site=&amp;Menu=yes" target="_blank">QQ<i class="icon-dot bg-color7"></i></a></div><div class="author-info-articles"><a class="author-info-articles-archives article-meta" href="/archives"><span class="pull-top">日志</span><span class="pull-bottom">8</span></a><a class="author-info-articles-tags article-meta" href="/tags"><span class="pull-top">标签</span><span class="pull-bottom">1</span></a><a class="author-info-articles-categories article-meta" href="/categories"><span class="pull-top">分类</span><span class="pull-bottom">2</span></a></div><div class="friend-link"><a class="friend-link-text" href="https://oierlin.cf" target="_blank">Oblivion</a></div></div></div><div id="main-container"><header><div id="menu-outer"><i class="menu-list-icon fas fa-bars"></i><nav id="menu-inner"><a class="menu-item" href="/">首页</a><a class="menu-item" href="/tags">标签</a><a class="menu-item" href="/categories">分类</a><a class="menu-item" href="/archives">归档</a><a class="menu-item" href="/about">关于</a></nav><div class="right-info"><a class="title-name" href="/">fbz</a><span id="now-time"></span></div></div></header><div id="content-outer"><div id="content-inner"><article id="post"><div class="post-header"><div class="title">斐波那契数</div><div class="container"><time class="button-hover post-date"><i class="fas fa-calendar-alt article-icon" aria-hidden="true"></i> 发表于 2019-11-05 | 更新于 2019-11-05</time><!--time.button-hover.post-date #[i.fas.fa-calendar-alt.article-icon(aria-hidden="true")] #[=__('post.modified')] #[=date(page['updated'], config.date_format)]--><div class="button-hover categories"><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><i class="fa fa-angle-right" style="margin: 0 8px;"></i><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E8%AE%BA/">数论</a></div><div class="button-hover tags"><i class="fa fa-tag article-icon" aria-hidden="true"></i><a class="link-a" href="/tags/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0/">数论学习</a></div></div></div><div class="main-content"><html>
+<head>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><title>MathJax TeX Test Page</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>
+
+<p>斐波那契数列，是1，1，2，3，5，8，13，···,却不止于这个数列<br><a id="more"></a></p>
+<h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>&emsp;&emsp;斐波那契数，又称黄金分割数列，是指数列:$0,1,1,2,3,5,8,……$。表示后一个数由前两个数的和组成，递归上定义为$f[0]=0,f[1]=1,f[i]=f[i-1]+f[i-2]$。</p>
+<h1 id="二、通项公式"><a href="#二、通项公式" class="headerlink" title="二、通项公式"></a>二、通项公式</h1><p>&emsp;&emsp;接下来用推导斐波那契数的通项公式：<br>&emsp;&emsp;假设常数s、r满足：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[n]-r\times f[n-1]=s\times (f[n-1]-r\times f[n-2])$</p>
+<p>&emsp;&emsp;再结合斐波那契数的定义，我们可以得到：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$r+s=1,rs=-1$</p>
+<p>&emsp;&emsp;所以，对于$n≥3$时，有：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[n]-r\times f[n-1]=s\times (f[n-1]-r\times f[n-2])$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[n-1]-r\times f[n-2]=s\times (f[n-2]-r\times f[n-3])$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$……$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[3]-r\times f[2]=s\times (f[2]-r\times f[1])$</p>
+<p>&emsp;&emsp;我们联立这n-2个式子，可以得到：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[n]-r\times f[n-1]=s^{n-2}\times (f[2]-r\times f[1])$</p>
+<p>&emsp;&emsp;因为：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$s=1-r,f[1]=f[2]=1$</p>
+<p>&emsp;&emsp;所以可以化简：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$f[n]=s^{n-1}+r\times f[n-1]$</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;$=s^{n-1}+r\times s^{n-2}+r^2\times f[n-2]$</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;$=s^{n-1}+r\times s^{n-2}+r^2\times s^{n-3}+r^3\times f[n-3]$</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;$……$</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;$=s^{n-1}+r\times s^{n-2}+r^2\times s^{n-3}+……+r^{n-1}$</p>
+<p>&emsp;&emsp;这就是一个以$s^{n-1}$为首项，$r^{n-1}$为末项，$\frac{r}{s}$为公比的等比数列，直接运用等比数列求和公式：</p>
+<script type="math/tex; mode=display">原式=\frac{s^{n-1}-r^{n-1}\times \frac{r}{s}}{1-\frac{r}{s}}</script><script type="math/tex; mode=display">=\frac{s^n-r^n}{s-r}</script><p>&emsp;&emsp;因为前文求出的两个关于$r、s$的式子其中一组解为：</p>
+<script type="math/tex; mode=display">s=\frac{1+\sqrt{5}}{2},r=\frac{1-\sqrt{5}}{2}</script><p>&emsp;&emsp;所以通项公式为：</p>
+<script type="math/tex; mode=display">f[n]=\frac{\sqrt{5}}{5}\times [(\frac{1+\sqrt{5}}{2})^n-(\frac{1-\sqrt{5}}{2})^n]</script><h1 id="例1-普通递归关系"><a href="#例1-普通递归关系" class="headerlink" title="例1 普通递归关系"></a>例1 普通递归关系</h1><p>&emsp;&emsp;给出以下定义在非负整数n下的递归关系：</p>
+<script type="math/tex; mode=display">f[n]=
+\begin{cases}
+    f_0 \qquad \qquad \qquad \qquad \qquad \qquad n=0 \\
+    f_1 \qquad \qquad \qquad \qquad \qquad \qquad n=1 \\
+    a\times f[n-1]+b\times f[n-2] \qquad otherwise
+\end{cases}</script><p>&emsp;&emsp;其中$a、b$是满足以下两个条件的常数：</p>
+<p>&emsp;&emsp;(一)$a^2+4b0$</p>
+<p>&emsp;&emsp;(二)$|a-\sqrt{a^2+4b}|≤2$</p>
+<p>&emsp;&emsp;给出$f_0,f_1,a,b,n$，求$f[n]$</p>
+<p>&emsp;</p>
+<p>&emsp;&emsp;我们考虑直接暴推公式，用类似斐波那契数的方法求得公式为：</p>
+<script type="math/tex; mode=display">f[n]=\frac{s^n(f_1-mf_0)-r^n(f_1-kf_0)}{s-r}</script><p>&emsp;&emsp;其中：</p>
+<script type="math/tex; mode=display">s、r=\frac{a±\sqrt{a^2+4b}}{2}</script><p>&emsp;&emsp;直接快速幂求解就行了。</p>
+<p>&emsp;&emsp;然而推完式子后发现这实际上是复杂度理论上和矩阵快速幂一样的，而且矩阵快速幂好写很多，然后就不想写代码了。</p>
+<h1 id="例2-数字迷阵"><a href="#例2-数字迷阵" class="headerlink" title="例2 数字迷阵"></a>例2 数字迷阵</h1><p>&emsp;&emsp;题面太长，懒得打了，自己去看吧。<a href="https://www.luogu.org/problem/P2544" target="_blank" rel="noopener">数字迷阵</a></p>
+<p>&emsp;&emsp;我们考虑每一行都相当于是斐波那契数，只要求出前两项即可，所以我们考虑前两项的规律。</p>
+<p>&emsp;&emsp;由于我们知道$A[i,2]=2A[i,1]-(i-1)$,只要考虑找出$A[i,1]$的规律即可。</p>
+<p>&emsp;&emsp;对于$A[i,1]$，我们分析它的差值可以知道：</p>
+<p>&emsp;&emsp;&emsp;&emsp;$1\sim2$行：$3$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$3\sim4$行：$2-3$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$5\sim7$行：$3-2-3$</p>
+<p>&emsp;&emsp;&emsp;&emsp;$8\sim12$行：$2-3-3-2-3$</p>
+<p>&emsp;&emsp;所以每次的差值就是由前两项的差值拼接起来，接下来就是求通项公式;</p>
+<p>&emsp;&emsp;但我们发现直接求通项公式很复杂，代码也难以在合适的时间复杂度内模拟，我们考虑求出它的前两项（$0$列和$-1$列）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>列数</th>
+<th style="text-align:center">-1</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:right">8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">21</td>
+<td style="text-align:center">34</td>
+<td style="text-align:right">55  </td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">29</td>
+<td style="text-align:center">47</td>
+<td style="text-align:center">76</td>
+<td style="text-align:right">123 </td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center">68</td>
+<td style="text-align:center">110</td>
+<td style="text-align:right">178 </td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">39</td>
+<td style="text-align:center">63</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">165</td>
+<td style="text-align:right">267 </td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">52</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">136</td>
+<td style="text-align:center">220</td>
+<td style="text-align:right">356 </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;所以我们可以发现第$-1$列的规律是自然数依次递增，而这个第$0$列，看着十分眼熟，实际上这与$Wythoff$博弈有关，我们知道$Wythoff$博弈的必胜态为：</p>
+<script type="math/tex; mode=display">
+(1,2),(3,5),(4,7),(6,10),(8,13)……</script><p>&emsp;&emsp;而Wythoff博弈后手必胜态的通项为：</p>
+<script type="math/tex; mode=display">
+(\lfloor{\phi}\rfloor,\lfloor\phi^2\rfloor),(\lfloor2\phi\rfloor,\lfloor2\phi^2\rfloor),(\lfloor3\phi\rfloor,\lfloor3\phi^2\rfloor),(\lfloor4\phi\rfloor,\lfloor4\phi^2\rfloor)……\\
+其中\phi=\frac{\sqrt{5}+1}{2}</script><p>定理：Wthyoff博弈的必胜态为序列$W$（即上述序列），通项公式为$(\lfloor n\phi\rfloor,\lfloor n\phi^2\rfloor)$</p>
+<p>证明：我们先证明序列W满足这三个性质：</p>
+<p>&emsp;&emsp;1、$W$无重复且不遗漏包含了所有整数</p>
+<p>&emsp;&emsp;2、$W$中两数之差依次为1，2，3，4，……</p>
+<p>&emsp;&emsp;3、$W$中的较小数依次递增</p>
+<p>&emsp;&emsp;性质1：</p>
+<blockquote>
+<p>Beatty-Rayleigh 定理 </p>
+<p>对于任意两个正无理数满足$\frac{1}{\alpha}+\frac{1}{\beta}=1$,那么数列$\lfloor\alpha\rfloor,\lfloor2\alpha\rfloor,\lfloor3\alpha\rfloor,……$和数列$\lfloor\beta\rfloor,\lfloor2\beta\rfloor,\lfloor3\beta\rfloor,……$既无重复有无遗漏的包含了所有的正整数</p>
+</blockquote>
+<p>&emsp;&emsp;而$\phi$和$\phi^2$恰好就是满足条件的两个正无理数(定理的具体证明就不写了)</p>
+<p>&emsp;&emsp;性质$2$和$3$比较显然，我们可以直接由通项公式知道</p>
+<p>&emsp;&emsp;由这三个性质我们可以知道三个关于W的条件</p>
+<p>&emsp;&emsp;$1、W中的任意一个数对都无法一步变成终止状态(0,0)$</p>
+<p>&emsp;&emsp;$2、W中的任意一个数对都无法通过一步变成W中的另一个数$</p>
+<p>&emsp;&emsp;$3、W外的任何一个数对都可以一步变成(0,0)或W中的数对$</p>
+<p>&emsp;&emsp;所以显然W是满足要求的数对</p>
+<p>&emsp;&emsp;不过关于$Fibonacci$数列和$Wthyoff$还有很多更深的联系，就不再赘述了，大家想了解可以看<a href="http://www.matrix67.com/blog/archives/6784" target="_blank" rel="noopener">这位大佬的博客</a></p>
+<p>&emsp;&emsp;所以我们从一道$Fibonacci$+矩阵快速幂题成功扯到了博弈，而事实关系远不止如此，题目中要我们求得表实际上就是$wthyoff$表，而这又和$Zeckendorf$表达有关，不得不感叹数学海洋的辽阔。</p>
+<p>&emsp;&emsp;扯到这里，第$1$列的通项公式就出来了，由于第$-1$列的通项为$i-1$，第$0$列的通项为$\lfloor i\phi\rfloor$,所以第$1$列的通项就为$\lfloor i\phi+i-1 \rfloor$</p>
+<p>&emsp;&emsp;已知前两项的斐波那契数做法就很多了，我们可以直接代入之前的公式，也可以用矩阵快速幂求解。</p>
+<p>&emsp;&emsp;代码就不贴了，知道结论挺好写的。</p>
+</div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-meta">本文作者: </span><span class="post-copyright-info"><a href="mailto:undefined" target="_blank" rel="noopener">fbz</a></span></div><div class="post-copyright-type"><span class="post-copyright-meta">本文链接: </span><span class="post-copyright-info"><a href="https://fangbozhen.github.io/2019/11/05/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/">https://fangbozhen.github.io/2019/11/05/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://fangbozhen.github.io">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://fangbozhen.github.io">fbz</a>！</span></div></div></article><div id="pagination"><div class="prev-post pull-left"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2019/11/05/Catalan%E6%95%B0/"><i class="fas fa-angle-left">&nbsp;</i><span>Catalen数</span></a></div><div class="next-post pull-right"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2019/11/05/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/"><span>中国剩余定理</span><span>&nbsp;</span><i class="fas fa-angle-right"></i></a></div></div><!--div!= paginator()--></div></div><div class="button-hover" id="return-top"><i class="fas fa-arrow-up" aria-hidden="true"></i></div><footer><div id="footer"><div class="button-hover" id="side-button"><i class="fas fa-arrow-right"></i></div><div class="right-content"><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fas fa-file-o"></i></span><span id="busuanzi_value_page_pv"></span><span></span></div><div class="copyright">&copy;2019 By fbz</div></div></div></footer></div><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery-3.3.1.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/velocity.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery.mCustomScrollbar.concat.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/fan.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/canvas_bg.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/utils.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/scroll.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/sidebar.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/copy.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/mathjax/mathjax.js"></script><!--script(src=url)--></body></html>

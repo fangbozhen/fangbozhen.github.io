@@ -1,3 +1,6 @@
+#post figure.highlight.cpp table::before {
+  content: "cpp";
+}
 #post figure.highlight.js table::before {
   content: "js";
 }
